@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+.im {
+	width: 200px;
+}
+</style>
+</head>
+<body>
+	<h1>Home page</h1>
+	<ul>
+		<li th:each="file:${files}"><img class="im" alt=""
+			th:src="@{/file/}+${file.getName()}"></li>
+	</ul>
+	<h1>Upload File</h1>
+	<form action="uploadfile" method="post" enctype="multipart/form-data">
+		<input type="file" name="myfile" multiple="multiple"> <input
+			type="submit" value="send">
+	</form>
+</body>
+</html>

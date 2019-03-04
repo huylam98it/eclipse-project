@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" ng-app="myapp">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.7/angular.min.js"></script>
+<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+<script type="text/javascript" th:src="@{/app.js}"></script>
+</head>
+<body ng-controller='myController'>
+	<h1>User page</h1>
+	<form id="myform" th:action="@{/userupload}" method="post"
+		enctype="multipart/form-data">
+		<input type="file" name="file" multiple="multiple"> <input
+			type="submit" value="send">
+	</form>
+	<button onclick="sendata()">send</button>
+
+	<form th:action="@{/logout}">
+		<input type="submit" value="logout">
+	</form>
+	<button ng-click="send()">angular button</button>
+
+	<script>
+		function sendata() {
+			var f = document.getElementById('myform');
+			var form = new FormData(f);
+			$.ajax({
+				method : 'POST',
+				url : 'http://localhost:8080/userupload',
+				processData : false,
+				contentType : false,
+				data : form,
+				success : function(data) {
+					console.log(data);
+					alert(data);
+				}
+			});
+		}
+	</script>
+</body>
+</html>
